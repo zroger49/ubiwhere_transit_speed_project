@@ -1,0 +1,6 @@
+env
+
+#.env # The env variable file goes in the github because its easier to set up
+
+db.sqlite3
+.pytest_cache
