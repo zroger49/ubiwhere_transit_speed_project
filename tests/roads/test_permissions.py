@@ -5,7 +5,7 @@ from roads.permissions import IsAdmin
 class IsAdminTest(TestCase):
     def setUp(self):
         self.admin_user = User.objects.create_superuser(username='admin', password='admin')
-        self.non_admin_user = User.objects.create_user(username='foo' password='bar')
+        self.non_admin_user = User.objects.create_user(username='foo', password='bar')
         self.factory = RequestFactory()
         self.permission_check = IsAdmin()
 
