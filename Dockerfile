@@ -1,12 +1,14 @@
 FROM python:3.11-slim
 
-WORKDIR ./
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
+# Set work directory
+WORKDIR /app
+
+# Install dependencies
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy project files
 COPY . .
-
-RUN python manage.py collectstatic --noinput
-
-CMD ["sh", "-c", "python manage.py makemigrate && python manage.py migrate && python manage.py createsuperuser --noinput && python manage.py import_segments.py && python manage.py import_sensors.py && python manage.py runserver"]

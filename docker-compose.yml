@@ -1,15 +1,22 @@
-version: '3.9'
+version: '3.8'
 
 services:
-  web:
+  django_app:
     build: .
-    command: >
-      sh -c "python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/.
     ports:
-      - "8000:8000"
-    depends_on:
-      - db
-
+      - "8005:8005"
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_SUPERUSER_EMAIL=admin@example.com
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=admin
+      - SENSOR_API_KEY=23231c7a-80a7-4810-93b3-98a18ecfbc42
+    command: >
+      sh -c "
+        python manage.py makemigrations &&
+        python manage.py migrate &&
+        python manage.py import_segments &&
+        python manage.py import_sensors &&
+        python manage.py createsuperuser --noinput || true &&
+        python manage.py runserver 0.0.0.0:8005"

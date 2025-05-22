@@ -8,10 +8,12 @@ Sensors report license plate sightings in bulk via authenticated API requests.
 
 ## Features
 
-- Register and annotate road segments.
-- Record vehicle speed readings per segment.
-- Accept bulk vehicle passage reports from mobile sensors.
+- Register road segments.
+- Register speed readings for a road segment. Dynamicaly assing traffic intensity
 - Filter road segments by latest traffic intensity.
+- Accept bulk vehicle passage reports from mobile sensors.
+- Filters passages of vevehicle based on plate number
+
 
 ## Setup Instructions
 
@@ -30,3 +32,6 @@ docker-compose up
 
 This step will build the Docker images and start the containers for the Django application. The data to be imported is in "data" folder.
 
+### Testing: 
+
+Postman requests for testing all the endpoints are available at project_traffict_monitor.postman_collection.json
